@@ -40,13 +40,13 @@ func downloadFile(url string, p string) {
 		panic(err)
 	}
 }
-func download(uu string) {
+func download(group, uu string) {
 	u, err := url.Parse(uu)
 	if err != nil {
 		panic(err)
 	}
 	log.Println("download", u.Path)
-	downloadFile(uu, fmt.Sprintf("rerouces%s", u.Path))
+	downloadFile(uu, fmt.Sprintf("rerouces/%s%s", group, u.Path))
 	// log.Println(u.Path)
 }
 
@@ -103,6 +103,7 @@ func main() {
 				panic(err)
 			}
 			ali = strings.ReplaceAll(ali, ress[i], "https://anchoragent.oss-cn-hangzhou.aliyuncs.com/"+key+u.Path)
+			// download(key, ress[i])
 		}
 	}
 	rep("d3ctxlq1ktw2nl")

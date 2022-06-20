@@ -93,21 +93,21 @@ func main() {
 		}
 		ans = strings.Replace(ans, param[0], enEscapeUrl, 1)
 	}
-	ali := ans
+	// ali := ans
 	rep := func(key string) {
 		ress := regexp.MustCompile(`https://`+key+`.cloudfront.net/[^\s]*.[mp3|jpeg|jpg|png]`).FindAllString(ans, -1)
 
 		for i := 0; i < len(ress); i++ {
-			u, err := url.Parse(ress[i])
-			if err != nil {
-				panic(err)
-			}
-			ali = strings.ReplaceAll(ali, ress[i], "https://anchoragent.oss-cn-hangzhou.aliyuncs.com/"+key+u.Path)
-			// download(key, ress[i])
+			// u, err := url.Parse(ress[i])
+			// if err != nil {
+			// 	panic(err)
+			// }
+			// ali = strings.ReplaceAll(ali, ress[i], "https://anchoragent.oss-cn-hangzhou.aliyuncs.com/"+key+u.Path)
+			download(key, ress[i])
 		}
 	}
 	rep("d3ctxlq1ktw2nl")
 	rep("d3t3ozftmdmh3i")
 	ioutil.WriteFile(*uuu+"_anchor.xml", []byte(ans), 0600)
-	ioutil.WriteFile(*uuu+"_ali.xml", []byte(ali), 0600)
+	// ioutil.WriteFile(*uuu+"_ali.xml", []byte(ali), 0600)
 }
